@@ -11,6 +11,7 @@ fi
 set -x
 git fetch upstream
 git checkout jvePilot-release
+git pull
 git merge upstream/jvePilot-release
 git push
 { set +x; } 2>/dev/null
