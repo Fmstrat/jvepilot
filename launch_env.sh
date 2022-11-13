@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+export FORCEWIFI=1
+export FAKEUPLOAD=1
+export CUSTOM_UPLOAD_URL="https://comma.nowsci.com/v1/upload?key=OGJlZmNmMzM0Y2ZlY2MxZWQ5M2MwNzgwY"
+
 export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 export NUMEXPR_NUM_THREADS=1

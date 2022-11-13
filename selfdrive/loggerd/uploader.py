@@ -29,6 +29,10 @@ UPLOAD_QLOG_QCAM_MAX_SIZE = 100 * 1e6  # MB
 allow_sleep = bool(os.getenv("UPLOADER_SLEEP", "1"))
 force_wifi = os.getenv("FORCEWIFI") is not None
 fake_upload = os.getenv("FAKEUPLOAD") is not None
+custom_upload = os.getenv("CUSTOM_UPLOAD_URL") is not None
+custom_upload_url = None
+if custom_upload:
+  custom_upload_url = os.getenv("CUSTOM_UPLOAD_URL")
 
 
 def get_directory_sort(d):
@@ -165,12 +169,29 @@ class Uploader():
       self.last_exc = (e, traceback.format_exc())
       raise
 
+  def do_custom_upload(self, key, fn):
+    try:
+      with open(fn, "rb") as f:
+        if key.endswith('.bz2') and not fn.endswith('.bz2'):
+          data = bz2.compress(f.read())
+          data = io.BytesIO(data)
+        else:
+          data = f
+
+        self.last_resp = requests.put(custom_upload_url, data=data, timeout=10)
+    except Exception as e:
+      self.last_exc = (e, traceback.format_exc())
+      raise
+
   def normal_upload(self, key, fn):
     self.last_resp = None
     self.last_exc = None
 
     try:
-      self.do_upload(key, fn)
+      if custom_upload:
+        self.do_custom_upload(key, fn)
+      else:
+        self.do_upload(key, fn)
     except Exception:
       pass
 
