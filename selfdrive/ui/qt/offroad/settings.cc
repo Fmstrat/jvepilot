@@ -172,6 +172,12 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
       "../assets/offroad/icon_metric.png",
     },
     {
+      "RecordAudio",
+      tr("Record Audio"),
+      tr("Record audio for use as a Dashcam (this data is not uploaded)."),
+      "../assets/offroad/icon_monitoring.png",
+    },
+    {
       "RecordFront",
       tr("Record and Upload Driver Camera"),
       tr("Upload data from the driver facing camera and help improve the driver monitoring algorithm."),

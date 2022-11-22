@@ -166,6 +166,7 @@ std::unordered_map<std::string, uint32_t> keys = {
     {"PandaSignatures", CLEAR_ON_MANAGER_START},
     {"Passive", PERSISTENT},
     {"PrimeType", PERSISTENT},
+    {"RecordAudio", PERSISTENT},
     {"RecordFront", PERSISTENT},
     {"RecordFrontLock", PERSISTENT},  // for the internal fleet
     {"ReleaseNotes", PERSISTENT},

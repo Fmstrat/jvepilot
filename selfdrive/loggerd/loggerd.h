@@ -52,6 +52,11 @@ struct LogCameraInfo {
   bool has_qcamera;
   bool record;
 };
+struct LogMicInfo {
+  const char *filename;
+  int bitrate;
+  bool record;
+};
 
 const LogCameraInfo cameras_logged[] = {
   {
@@ -99,4 +104,9 @@ const LogCameraInfo qcam_info = {
   .record = true,
   .frame_width = 526,
   .frame_height = 330,
+};
+const LogMicInfo mics_logged = {
+  .filename = "audio.mp2",
+  .bitrate = 64000,
+  .record = Params().getBool("RecordAudio"),
 };
