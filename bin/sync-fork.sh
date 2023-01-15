@@ -14,4 +14,8 @@ git checkout jvePilot-release
 git pull
 git merge upstream/jvePilot-release
 git push
+git checkout jvePilot-beta
+git pull
+git merge upstream/jvePilot-beta
+git push
 { set +x; } 2>/dev/null
