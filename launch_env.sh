@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+export FINGERPRINT="CHRYSLER PACIFICA 2018"
 export FORCEWIFI=1
 export FAKEUPLOAD=1
 export OMP_NUM_THREADS=1
