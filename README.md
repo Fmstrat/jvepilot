@@ -229,6 +229,12 @@ Enable this setting if you are seeing the lead car yellow triangle acting errati
 * Default: False 
 * Vehicle Restart Required: Yes
 
+### Reverse Radar X Axis
+When enabled, the radar's x-axis is reversed.
+Enable this setting if you are seeing the lead car yellow triangle move the opposite direction from the car it's tracking.  
+* Default: False 
+* Vehicle Restart Required: Yes
+
 ---
 
 Table of Contents

@@ -1,6 +1,8 @@
 Version jvePilot-0.9.5(v3.14.1)
 ========================
 Visit http://bit.ly/jvereadme for more information
+* Some vehicles have the lead car indicator tracking in the opposite direction
+  * New setting to allow reversing x-axis on radar
 * Update to 0.9.5 (2023-11-17)
   * New driving model
     * Improved navigate on openpilot performance using navigation instructions as an additional model input
@@ -10,7 +12,6 @@ Visit http://bit.ly/jvereadme for more information
 Version jvePilot-0.9.4(v3.14.0)
 ========================
 * comma 3X support
-Visit http://bit.ly/jvereadme for more information
 * Update to 0.9.4
   * Navigate on openpilot in Experimental mode
     * When navigation has a destination, openpilot will input the map information into the model, which provides useful context to help the model understand the scene
