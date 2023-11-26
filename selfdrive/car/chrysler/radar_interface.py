@@ -48,7 +48,7 @@ class RadarInterface(RadarInterfaceBase):
     self.updated_messages = set()
     self.trigger_msg = LAST_MSG
 
-    self.yRel_multiplier = 1 if CP.carFingerprint in PRE_2019 else -1
+    self.yRel_multiplier = -1 if Params().get_bool("jvePilot.settings.reverseRadar") else 1
 
   def update(self, can_strings):
     if self.rcp is None or self.CP.radarUnavailable:
@@ -81,7 +81,7 @@ class RadarInterface(RadarInterfaceBase):
         self.pts[trackId].dRel = cpt['LONG_DIST']  # from front of car
         # our lat_dist is positive to the right in car's frame.
         # TODO what does yRel want?
-        self.pts[trackId].yRel = cpt['LAT_DIST'] * self.yRel_multiplier # in car frame's y axis, left is positive
+        self.pts[trackId].yRel = cpt['LAT_DIST'] * self.yRel_multiplier  # in car frame's x-axis, left is positive
       else:  # d_* message
         self.pts[trackId].vRel = cpt['REL_SPEED']
 

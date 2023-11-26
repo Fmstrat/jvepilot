@@ -143,7 +143,14 @@ JvePilotTogglesPanel::JvePilotTogglesPanel(QWidget *parent) : ListWidget(parent)
   addItem(new ParamControl("jvePilot.settings.visionOnly",
                            "ADVANCED: Vision only",
                            "Enable this setting if you are seeing the lead car yellow triangle acting erratically.",
-                           "../assets/jvepilot/settings/icon_wp_mod.png",
+                           "../assets/jvepilot/settings/icon_eye.png",
+                           this));
+
+  // Reverse Radar
+  addItem(new ParamControl("jvePilot.settings.reverseRadar",
+                           "ADVANCED: Reverse Radar X Axis",
+                           "Enable this setting if the lead car yellow triangle is reversed on the X axis",
+                           "../assets/offroad/icon_calibration.png",
                            this));
 }
 
