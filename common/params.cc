@@ -98,6 +98,7 @@ std::unordered_map<std::string, uint32_t> keys = {
     {"jvePilot.settings.deviceOffset", PERSISTENT},
     {"jvePilot.settings.reverseAccSpeedChange", PERSISTENT},
     {"jvePilot.settings.visionOnly", PERSISTENT},
+    {"jvePilot.settings.reverseRadar", PERSISTENT},
     {"jvePilot.settings.slowInCurves", PERSISTENT},
     {"jvePilot.settings.slowInCurves.speedRatio", PERSISTENT},
     {"jvePilot.settings.slowInCurves.speedDropOff", PERSISTENT},
