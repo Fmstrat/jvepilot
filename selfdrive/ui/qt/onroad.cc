@@ -446,8 +446,6 @@ void AnnotatedCameraWidget::drawHud(QPainter &p) {
   // current speed
   p.setFont(InterFont(176, QFont::Bold));
   drawText(p, rect().center().x(), 210, speedStr, 255);
-  p.setFont(InterFont(66));
-  drawText(p, rect().center().x(), 290, speedUnit, 200);
 
   // Color Speed
   if (pedalPressedAmount < 0) {
@@ -456,6 +454,10 @@ void AnnotatedCameraWidget::drawHud(QPainter &p) {
     p.setPen(QColor(0, 200, 0, pedalPressedAmount));
   }
   drawText(p, rect().center().x(), 210, speedStr, -1);
+
+  //speed unit
+  p.setFont(InterFont(66));
+  drawText(p, rect().center().x(), 290, speedUnit, 200);
 
   if (accEco >= 0) { // got data yet?
     // Auto Follow
