@@ -7,8 +7,8 @@ from functools import lru_cache
 from openpilot.common.basedir import BASEDIR
 from openpilot.system.swaglog import cloudlog
 
-RELEASE_BRANCHES = ['jvePilot-release', 'origin/jvePilot-release', 'nightly']
-TESTED_BRANCHES = RELEASE_BRANCHES + []
+RELEASE_BRANCHES = ['jvePilot-release', 'origin/jvePilot-release', 'release3-staging', 'dashcam3-staging', 'release3', 'dashcam3', 'nightly']
+TESTED_BRANCHES = RELEASE_BRANCHES + ['devel', 'devel-staging']
 
 training_version: bytes = b"0.2.0"
 terms_version: bytes = b"2"
