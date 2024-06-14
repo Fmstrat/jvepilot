@@ -1,0 +1,77 @@
+commit 53d98c5b9b32c9c0c685ed801c7e0dfc6f85f5e5
+Author: Fmstrat <nospam@nowsci.com>
+Date:   Fri Jun 14 09:59:26 2024 -0400
+
+    nowsci patch file
+
+diff --git a/patch/nowsci.175798a4.patch b/patch/nowsci.175798a4.patch
+new file mode 100644
+index 00000000..d1e45adb
+--- /dev/null
++++ b/patch/nowsci.175798a4.patch
+@@ -0,0 +1,65 @@
++commit 175798a47bb86c05486c2b694e45e870c032f5ca
++Author: Fmstrat <nospam@nowsci.com>
++Date:   Fri Jun 14 09:58:44 2024 -0400
++
++    nowsci patch
++
++diff --git a/bin/sync-fork.sh b/bin/sync-fork.sh
++new file mode 100755
++index 00000000..1a42c320
++--- /dev/null
+++++ b/bin/sync-fork.sh
++@@ -0,0 +1,25 @@
+++#!/usr/bin/env bash
+++
+++UPSTREAM="https://github.com/j-vanetten/openpilot.git"
+++
+++set -e
+++if [ -z "$(git remote -v |grep upstream)" ]; then
+++    set -x
+++    git checkout --track origin/jvePilot-beta
+++    git checkout jvePilot-release
+++    git remote add upstream ${UPSTREAM}
+++    { set +x; } 2>/dev/null
+++fi
+++set -x
+++git fetch upstream
+++git checkout jvePilot-release
+++git pull
+++git merge upstream/jvePilot-release
+++git push
+++git checkout jvePilot-beta
+++git pull
+++git merge upstream/jvePilot-beta
+++git push
+++git checkout jvePilot-release
+++{ set +x; } 2>/dev/null
+++
++diff --git a/launch_env.sh b/launch_env.sh
++index 6859afb0..4a8f568e 100755
++--- a/launch_env.sh
+++++ b/launch_env.sh
++@@ -1,5 +1,8 @@
++ #!/usr/bin/bash
++ 
+++#export FINGERPRINT="CHRYSLER PACIFICA 2018"
+++export FORCEWIFI=1
+++export FAKEUPLOAD=1
++ export OMP_NUM_THREADS=1
++ export MKL_NUM_THREADS=1
++ export NUMEXPR_NUM_THREADS=1
++diff --git a/selfdrive/updated.py b/selfdrive/updated.py
++index 3e4a849d..268814ea 100755
++--- a/selfdrive/updated.py
+++++ b/selfdrive/updated.py
++@@ -32,8 +32,8 @@ FINALIZED = os.path.join(STAGING_ROOT, "finalized")
++ 
++ OVERLAY_INIT = Path(os.path.join(BASEDIR, ".overlay_init"))
++ 
++-DAYS_NO_CONNECTIVITY_MAX = 14     # do not allow to engage after this many days
++-DAYS_NO_CONNECTIVITY_PROMPT = 10  # send an offroad prompt after this many days
+++DAYS_NO_CONNECTIVITY_MAX = 120     # do not allow to engage after this many days
+++DAYS_NO_CONNECTIVITY_PROMPT = 60  # send an offroad prompt after this many days
++ 
++ class UserRequest:
++   NONE = 0
