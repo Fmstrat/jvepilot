@@ -98,7 +98,7 @@ class CAR(Platforms):
 class CarControllerParams:
   def __init__(self, CP):
     self.STEER_ERROR_MAX = 80
-    self.STEER_STEP = 1 if params.get_bool("jvePilot.settings.steer.torque") else 2
+    self.STEER_STEP = 2 if params.get_bool("jvePilot.settings.steer.pid") else 1
 
     if CP.carFingerprint in RAM_HD:
       self.STEER_DELTA_UP = 14

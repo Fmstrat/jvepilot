@@ -220,11 +220,18 @@ Requires WP Mod and works best with my version of the firmware.
 Flash it here: Branch/git `jvePilot-wp-mod` / https://github.com/j-vanetten/panda-wp-mod.git
 * Default: True
 * Vehicle Restart Required: Yes
-
 ### Vision Only
 When enabled, the model will no longer use any radar signals and rely on vision only.
 Enable this setting if you are seeing the lead car yellow triangle acting erratically.
 * Default: False
+* Vehicle Restart Required: Yes
+### PID Controller
+When enabled, the lateral controller used will switch from the torque controller to the PID controller
+* Default: False
+* Vehicle Restart Required: Yes
+### Target Car
+If your car isn't auto-detected, this allows the manual selection of you car
+* Default: Auto
 * Vehicle Restart Required: Yes
 
 ---

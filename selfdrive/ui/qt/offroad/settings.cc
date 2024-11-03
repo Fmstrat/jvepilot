@@ -158,10 +158,10 @@ JvePilotTogglesPanel::JvePilotTogglesPanel(QWidget *parent) : ListWidget(parent)
                            "If you have a mod that allows OP to steering down to a stop, enable this.",
                            "../assets/jvepilot/settings/icon_wp_mod.png",
                            this));
-  // Torque Controller
-  addItem(new ParamControl("jvePilot.settings.steer.torque",
-                           "ADVANCED: Torque Controller",
-                           "Use the torque controller instead of PID for steering.",
+  // PID Controller
+  addItem(new ParamControl("jvePilot.settings.steer.pid",
+                           "ADVANCED: PID Controller",
+                           "Use the PID controller instead of torque for steering.",
                            "../assets/img_chffr_wheel.png",
                            this));
   // Vision Only
