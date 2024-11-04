@@ -6,7 +6,9 @@ from panda.python import uds
 from openpilot.selfdrive.car import CarSpecs, DbcDict, PlatformConfig, Platforms, dbc_dict
 from openpilot.selfdrive.car.docs_definitions import CarHarness, CarDocs, CarParts
 from openpilot.selfdrive.car.fw_query_definitions import FwQueryConfig, Request, p16
+from common.params import Params
 
+params = Params()
 Ecu = car.CarParams.Ecu
 
 
@@ -95,8 +97,10 @@ class CAR(Platforms):
 
 class CarControllerParams:
   def __init__(self, CP):
-    self.STEER_STEP = 2  # 50 Hz
+    use_pid = params.get_bool("jvePilot.settings.steer.pid")
     self.STEER_ERROR_MAX = 80
+    self.STEER_STEP = 2 if use_pid else 1
+
     if CP.carFingerprint in RAM_HD:
       self.STEER_DELTA_UP = 14
       self.STEER_DELTA_DOWN = 14
@@ -106,9 +110,8 @@ class CarControllerParams:
       self.STEER_DELTA_DOWN = 6
       self.STEER_MAX = 261  # EPS allows more, up to 350?
     elif CP.carFingerprint in JEEPS:
-      self.STEER_STEP = 1  # 100 Hz
-      self.STEER_DELTA_UP = 6
-      self.STEER_DELTA_DOWN = 6
+      self.STEER_DELTA_UP = 3 if use_pid else 6
+      self.STEER_DELTA_DOWN = 3 if use_pid else 6
       self.STEER_MAX = 261  # EPS allows more, up to 350?
     else:
       self.STEER_DELTA_UP = 3
