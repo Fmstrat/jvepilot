@@ -14,6 +14,7 @@
 #include "selfdrive/ui/qt/widgets/prime.h"
 #include "selfdrive/ui/qt/widgets/scrollview.h"
 #include "selfdrive/ui/qt/widgets/ssh_keys.h"
+#include "common/params.h"
 
 JvePilotTogglesPanel::JvePilotTogglesPanel(QWidget *parent) : ListWidget(parent) {
   QList<AbstractControl*> toggles;
@@ -142,13 +143,6 @@ JvePilotTogglesPanel::JvePilotTogglesPanel(QWidget *parent) : ListWidget(parent)
         "Compensate for mounting your device off-center in the windshield."
         "\nFor example, 0.04 if your device is 4cm left of center."
         "\nNOTE: This is not how far the CAMERA is off-center, but how far the MOUNT/DEVICE is off-center."
-    },
-    { "jvePilot.settings.steer.chillLevel",
-      0, 200,
-      "Torque Chill Level",
-      "Default: 20, Min: 0, Max: 200\n"
-        "Torque changes above this value are more aggressive about adjusting to it."
-        "\nA higher value can help prevent steering osculation."
     }
   };
   addItem(new LabelControl("jvePilot Control Settings",
@@ -164,7 +158,12 @@ JvePilotTogglesPanel::JvePilotTogglesPanel(QWidget *parent) : ListWidget(parent)
                            "If you have a mod that allows OP to steering down to a stop, enable this.",
                            "../assets/jvepilot/settings/icon_wp_mod.png",
                            this));
-
+  // PID Controller
+  addItem(new ParamControl("jvePilot.settings.steer.pid",
+                           "ADVANCED: PID Controller",
+                           "Use the PID controller instead of torque for steering.",
+                           "../assets/img_chffr_wheel.png",
+                           this));
   // Vision Only
   addItem(new ParamControl("jvePilot.settings.visionOnly",
                            "ADVANCED: Vision only",
@@ -178,6 +177,30 @@ JvePilotTogglesPanel::JvePilotTogglesPanel(QWidget *parent) : ListWidget(parent)
                            "Enable this setting if the lead car yellow triangle is reversed on the X axis",
                            "../assets/offroad/icon_calibration.png",
                            this));
+
+  // Make/Model/Year
+  targetCarBtn = new ButtonControl(tr("Target Car"), tr("SELECT"));
+  connect(targetCarBtn, &ButtonControl::clicked, [=]() {
+    QStringList cars = {
+        "Auto detect",
+        "Grand Cherokee 2018",
+        "Grand Cherokee 2019",
+        "Pacifica Hybrid 2017",
+        "Pacifica Hybrid 2018",
+        "Pacifica Hybrid 2019",
+        "Pacifica 2018",
+        "Pacifica 2020",
+        "Durango",
+    };
+
+    QString cur = QString::fromStdString(params.get("jvePilot.settings.selectedCar"));
+    QString selection = MultiOptionDialog::getSelection(tr("Select a car"), cars, cur, this);
+    if (!selection.isEmpty()) {
+      params.put("jvePilot.settings.selectedCar", selection.toStdString());
+      targetCarBtn->setValue(QString::fromStdString(params.get("jvePilot.settings.selectedCar")));
+    }
+  });
+  addItem(targetCarBtn);
 }
 
 TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
